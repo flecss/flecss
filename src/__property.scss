@@ -1,0 +1,17 @@
+@function _scoped-property($scope, $identifier) {
+    @return --flecss__#{$scope}_#{$identifier};
+}
+
+@mixin define-scoped-property($scope, $identifier, $value, $root: true) {
+    @if not $root {
+        #{_scoped-property($scope, $identifier)}: $value;
+    } @else {
+        @at-root :root {
+            #{_scoped-property($scope, $identifier)}: $value;
+        }
+    }
+}
+
+@function get-scoped-property($scope, $identifier) {
+    @return var(#{_scoped-property($scope, $identifier)});
+}

@@ -1,0 +1,26 @@
+@use "sass:math";
+
+@use "flecss.config" as config;
+
+@use "../../_property";
+
+@use "./__orders";
+
+
+@function _compute-space($exponent) {
+    @return config.$base-space * math.pow(config.$space-scale-coefficient, $exponent);
+}
+
+
+@function get-space($order: "m", $negative: false) {
+    @if $order == "zero" {
+        @return 0;
+    }
+
+    $factor: 1;
+    @if $negative {
+        $factor: -1;
+    }
+
+    @return $factor * _compute-space(map-get(_orders.$orders, $order));
+}

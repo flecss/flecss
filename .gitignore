@@ -1,8 +1,9 @@
 node_modules/
-dist/
+css/
 
 .DS_Store
 
-src/core/_class.scss
 test/end-to-end/test.css
 test/cli/test.css
+
+example/extra.css

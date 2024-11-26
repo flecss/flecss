@@ -1,0 +1,68 @@
+@use "../class" as *;
+
+@use "../../util/layout/fontsize";
+
+
+
+@mixin _class-modifier($order) {
+    &--#{$order} {
+        font-size: fontsize.get-fontsize($order);
+
+        @content;
+    }
+
+    @content;
+}
+
+@mixin _fontsize-class-modifier {
+    @include _class-modifier("zero") {
+        @content;
+    }
+    @include _class-modifier("xxs") {
+        @content;
+    }
+    @include _class-modifier("xs") {
+        @content;
+    }
+    @include _class-modifier("s") {
+        @content;
+    }
+    @include _class-modifier("m") {
+        @content;
+    }
+    @include _class-modifier("l") {
+        @content;
+    }
+    @include _class-modifier("xl") {
+        @content;
+    }
+    @include _class-modifier("xxl") {
+        @content;
+    }
+}
+
+
+@include class("text") {
+    @include _fontsize-class-modifier;
+    
+    @include class-specifier("left") {
+        @include _fontsize-class-modifier {
+            text-align: left;
+        }
+    }
+    @include class-specifier("center") {
+        @include _fontsize-class-modifier {
+            text-align: center;
+        }
+    }
+    @include class-specifier("right") {
+        @include _fontsize-class-modifier {
+            text-align: right;
+        }
+    }
+    @include class-specifier("justify") {
+        @include _fontsize-class-modifier {
+            text-align: justify;
+        }
+    }
+}

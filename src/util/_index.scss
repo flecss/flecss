@@ -1,9 +1,5 @@
-@forward "./mixins/class";
-@forward "./mixins/breakpoint";
-@forward "./mixins/color";
-@forward "./mixins/font";
-@forward "./mixins/theme";
+@forward "./class";
 
-@forward "./functions/color" as get-*;
-@forward "./functions/fontsize" as get-*;
-@forward "./functions/space" as get-*;
+@forward "./state/";
+@forward "./layout/";
+@forward "./style/";

@@ -1,0 +1,119 @@
+@use "../../util/state/breakpoint";
+
+@use "../class" as *;
+
+
+@function flex__child-width($m) {
+    @return calc((100% / (#{$m} + 0.001)) - (var(--flex-parent-gap) * (#{$m} - 1) / #{$m}));
+}
+
+
+@mixin flex__partition($n) {
+    @include class-specifier($n) {
+        @include class-modifier("flex-gap", "l") {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: get-modifier("flex-gap");
+            width: 100%;
+            height: fit-content;
+            
+            --flex-parent-gap: #{get-modifier("flex-gap")};
+            & > * {
+                width: flex__child-width($n) !important;
+                
+                @if $n > 4 {
+                    @include breakpoint.breakpoint--m {
+                        width: flex__child-width(4) !important;
+                    }
+                }
+                @if $n > 2 {
+                    @include breakpoint.breakpoint--s {
+                        width: flex__child-width(2) !important;
+                    }
+                }
+                @if $n > 1 {
+                    @include breakpoint.breakpoint--xs {
+                        width: flex__child-width(1) !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include class("flex") {
+    display:  flex;
+
+    @include flex__partition(1);
+    @include flex__partition(2);
+    @include flex__partition(3);
+    @include flex__partition(4);
+    @include flex__partition(5);
+
+    @include class-specifier("horizontal") {
+        @include class-modifier("flex-gap") {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            align-items: center;
+            gap: get-modifier("flex-gap");
+        }
+    }
+    @include class-specifier("vertical") {
+        @include class-modifier("flex-gap") {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: get-modifier("flex-gap");
+        }
+    }
+
+    @include class-specifier("left") {
+        @include class-modifier("flex-gap", "xl") {
+            @include breakpoint.breakpoint--s {                
+                & > * {
+                    width: 100%;
+                }
+                
+                flex-wrap: wrap;
+            }
+
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: get-modifier("flex-gap");
+            width: 100%;
+            height: fit-content ;
+
+            & > *:first-child {
+                flex: 1 0 0;
+                max-width: 100%;
+            }
+        }
+    }
+    @include class-specifier("right") {
+        @include class-modifier("flex-gap", "xl") {
+            @include breakpoint.breakpoint--s {
+                & > * {
+                    width: 100%;
+                }
+                
+                flex-wrap: wrap;
+            }
+
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: get-modifier("flex-gap");
+            width: 100%;
+            height: fit-content;
+
+            & > *:last-child {
+                flex: 1 0 0;
+                max-width: 100%;
+            }
+        }
+    }
+}

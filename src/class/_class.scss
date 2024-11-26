@@ -1,0 +1,69 @@
+@use "../util/layout/space";
+
+@use "../_property";
+
+
+@mixin class($class, $class-shorthand: $class) {
+    .#{$class}, .#{$class-shorthand} {
+        @content;
+    }
+}
+
+
+@mixin class-specifier($specifier) {
+    &_#{$specifier} {
+        @content;
+    }
+}
+
+
+@mixin _class-modifier($var, $order) {
+    &--#{$order} {
+        @include property.define-scoped-property("space", $var, space.get-space($order), false);
+
+        @content;
+    }
+    
+    @content;
+}
+
+
+@mixin class-modifier($var, $default-order: "m") {
+    @include property.define-scoped-property("space", $var, space.get-space($default-order), false);
+    
+    @include _class-modifier($var, "zero") {
+        @content;
+    }
+    @include _class-modifier($var, "xxs") {
+        @content;
+    }
+    @include _class-modifier($var, "xs") {
+        @content;
+    }
+    @include _class-modifier($var, "s") {
+        @content;
+    }
+    @include _class-modifier($var, "m") {
+        @content;
+    }
+    @include _class-modifier($var, "l") {
+        @content;
+    }
+    @include _class-modifier($var, "xl") {
+        @content;
+    }
+    @include _class-modifier($var, "xxl") {
+        @content;
+    }
+}
+
+@function get-modifier($var) {
+    @return property.get-scoped-property("space", $var);
+}
+
+
+@mixin class-connect($name) {
+    & + .#{$name} {
+        @content;
+    }
+}

@@ -25,13 +25,21 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-function test(styleProperty, expectedValue, subChildIndex) {
+function test(styleProperty, rawExpectedValue, subChildIndex) {
     const testElement = Array.from(document.querySelectorAll("*[test]")).pop();
     let testPivotElement = testElement.children[0];
     testPivotElement = !isNaN(subChildIndex) ? testPivotElement.children[subChildIndex] : testPivotElement;
 
     const resultElement = document.querySelector("#result").content.cloneNode(true);
-    const actualValue = window.getComputedStyle(testPivotElement)[styleProperty];
+
+    const roundPxValue = value => {
+        return (/^\d+(\.\d+)?px$/.test(value))
+            ? `${Math.round(parseFloat(value) * 1000) / 1000}px`
+            : value;
+    };
+    const expectedValue = roundPxValue(rawExpectedValue);
+    const actualValue = roundPxValue(window.getComputedStyle(testPivotElement)[styleProperty]);
+
     const resolvedActualValue = expectedValue.fn
     ? expectedValue.fn(actualValue)
     : actualValue;

@@ -1,6 +1,0 @@
-@forward "../../classes/";
-
-
-@mixin class($classifier) {
-    @extend .#{$classifier} !optional;
-}

@@ -1,8 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 
-
-const DIST_PATH = path.join(__dirname, "../dist");
+const { DIST_PATH } = require("./DIST_PATH");
 
 
 function reportLibraryMeta(libraryName) {
@@ -12,7 +11,7 @@ function reportLibraryMeta(libraryName) {
             Math.round(((stats.size * 2**-10) + Number.EPSILON) * 100) / 100
         }kB`
     };
-    
+
     console.log(`\x1b[33m\x1b[4m${
         libraryName
     }\x1b[24m\n${
@@ -24,5 +23,3 @@ function reportLibraryMeta(libraryName) {
 
 
 reportLibraryMeta("flecss");
-reportLibraryMeta("flecss.min");
-reportLibraryMeta("flecss.min.shorthand");

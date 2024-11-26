@@ -1,0 +1,41 @@
+@use "../class" as *;
+
+
+@include class("margin") {
+    @include class-modifier("margin") {
+        margin: get-modifier("margin");
+    }
+    
+    @include class-specifier("vertical") {
+        @include class-modifier("margin--v") {
+            margin-top: get-modifier("margin--v");
+            margin-bottom: get-modifier("margin--v");
+        }
+    }
+    @include class-specifier("horizontal") {
+        @include class-modifier("margin--h") {
+            margin-left: get-modifier("margin--h");
+            margin-right: get-modifier("margin--h");
+        }
+    }
+    @include class-specifier("top") {
+        @include class-modifier("margin--t") {
+            margin-top: get-modifier("margin--t");
+        }
+    }
+    @include class-specifier("bottom") {
+        @include class-modifier("margin--b") {
+            margin-bottom: get-modifier("margin--b");
+        }
+    }
+    @include class-specifier("left") {
+        @include class-modifier("margin--l") {
+            margin-left: get-modifier("margin--l");
+        }
+    }
+    @include class-specifier("right") {
+        @include class-modifier("margin--r") {
+            margin-right: get-modifier("margin--r");
+        }
+    }
+}

@@ -14,8 +14,8 @@
   ],
   "files": [
     "./src/",
-    "./dist/",
     "./lib/",
+    "./css/",
     "./cli.help.txt"
   ],
   "repository": {
@@ -41,7 +41,8 @@
     "test:cli:watch": "npm run test:cli -- --watch",
     "test": "npm run test:unit && npm run test:end-to-end",
     "prerelease": "npm run test && npm run build",
-    "release": "npx rjs-releasing . --github"
+    "release": "npx rjs-releasing . --github",
+    "example:transpile": " ./flecss.sh ./example/extra.scss ./example/extra.css"
   },
   "dependencies": {
     "clean-css": "^5.3.3",

@@ -2,13 +2,13 @@
 
 
 .test--extend-pv {
-    @include flecss.class("p_v");
+    @include flecss.class("padding_vertical");
 }
 .test--extend-pvl {
-    @include flecss.class("p_v--l");
+    @include flecss.class("padding_vertical--l");
 }
 
-@include flecss.color("test", #FF0000);
+@include flecss.set-color("test", #FF0000);
 
 .test--color {
     color: flecss.get-color("test");

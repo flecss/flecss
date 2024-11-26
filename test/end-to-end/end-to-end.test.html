@@ -25,10 +25,10 @@
     <body>
         <script>
             const ZERO_PX = "0px";
-            const S_PX = "14.875px";
-            const M_PX = "29.75px";
-            const L_PX = "59.5px";
-            const XL_PX = "119px";
+            const S_PX = "11px";
+            const M_PX = "22px";
+            const L_PX = "44px";
+            const XL_PX = "88px";
         </script>
 
         <div class="total">
@@ -40,7 +40,7 @@
         <p class="info">
             virtual viewport width: 1440px
         </p>
-        
+
         <main>
 
             <section>
@@ -53,16 +53,16 @@
                     test("pointer-events", "none");
                     test("opacity", "0.25");
                 </script>
-                
+
                 <div test="hide">
-                    <div class="d_hide">Lorem Ipsum</div>
+                    <div class="display_hide">Lorem Ipsum</div>
                 </div>
                 <script>
                     test("visibility", "hidden");
                 </script>
                 
                 <div test="collapse">
-                    <div class="d_collapse">Lorem Ipsum</div>
+                    <div class="display_collapse">Lorem Ipsum</div>
                 </div>
                 <script>
                     test("display", "none");
@@ -154,7 +154,7 @@
                 <h3>Margin</h3>
 
                 <div test="default">
-                    <div class="m"></div>
+                    <div class="margin"></div>
                 </div>
                 <script>
                     test("margin", M_PX);
@@ -170,16 +170,16 @@
                 </script>
                 
                 <div test="horizontal">
-                    <div class="m_vertical"></div>
+                    <div class="margin_vertical"></div>
                 </div>
                 <script>
                     test("margin-top", M_PX);
                     test("margin-bottom", M_PX);
                     test("margin-left", ZERO_PX);
                 </script>
-                
+
                 <div test="top">
-                    <div class="m_t"></div>
+                    <div class="margin_top"></div>
                 </div>
                 <script>
                     test("margin-top", M_PX);
@@ -187,7 +187,7 @@
                 </script>
                 
                 <div test="left">
-                    <div class="m_l"></div>
+                    <div class="margin_left"></div>
                 </div>
                 <script>
                     test("margin-left", M_PX);
@@ -195,7 +195,7 @@
                 </script>
 
                 <div test="default large">
-                    <div class="m m--l"></div>
+                    <div class="margin--l"></div>
                 </div>
                 <script>
                     test("margin", L_PX);
@@ -206,7 +206,7 @@
                 <h3>Padding</h3>
 
                 <div test="default">
-                    <div class="p"></div>
+                    <div class="padding"></div>
                 </div>
                 <script>
                     test("padding", M_PX);
@@ -222,7 +222,7 @@
                 </script>
                 
                 <div test="horizontal">
-                    <div class="p_vertical"></div>
+                    <div class="padding_vertical"></div>
                 </div>
                 <script>
                     test("padding-top", M_PX);
@@ -231,7 +231,7 @@
                 </script>
                 
                 <div test="top">
-                    <div class="p_t"></div>
+                    <div class="padding_top"></div>
                 </div>
                 <script>
                     test("padding-top", M_PX);
@@ -239,7 +239,7 @@
                 </script>
                 
                 <div test="left">
-                    <div class="p_l"></div>
+                    <div class="padding_left"></div>
                 </div>
                 <script>
                     test("padding-left", M_PX);
@@ -247,7 +247,7 @@
                 </script>
 
                 <div test="top small">
-                    <div class="p_t--s"></div>
+                    <div class="padding_top--s"></div>
                 </div>
                 <script>
                     test("padding-top", S_PX);
@@ -260,7 +260,7 @@
 
                 <div test="section wrapper">
                     <div class="section">
-                        <div class="w"></div>
+                        <div class="wrapper"></div>
                     </div>
                 </div>
                 <script>
@@ -272,7 +272,7 @@
                         expected: sectionW,
                         eval: (actual, expected) => actual > expected
                     });
-                    test("width", "772.5px", 0);
+                    test("width", "792px", 0);
                     test("padding", [ XL_PX, ZERO_PX ].join(" "), 0);
                     test("padding-left", ZERO_PX, 0);
                 </script>
@@ -291,7 +291,7 @@
                 </script>
 
                 <div test="right">
-                    <p class="t_right">
+                    <p class="text_right">
                         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod…
                     </p>
                 </div>
@@ -300,7 +300,7 @@
                 </script>
 
                 <div test="center">
-                    <p class="t_center">
+                    <p class="text_center">
                         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod…
                     </p>
                 </div>
@@ -309,7 +309,7 @@
                 </script>
 
                 <div test="justify">
-                    <p class="t_justify">
+                    <p class="text_justify">
                         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod…
                     </p>
                 </div>
@@ -318,35 +318,32 @@
                 </script>
 
                 <script>
-                    const getFontSize = dimension => {
+                    const getFontSize = (order = 0, scaleCoefficient = 1.15) => {
                         const compStyle = getComputedStyle(document.documentElement);
-                        return `${Math.round(
-                            17 * parseFloat(1.25)**dimension
-                            * 10000
-                        ) / 10000}px`;
+                        return `${16 * scaleCoefficient**order}px`;
                     };
                 </script>
-                
+
                 <div test="size xxs">
-                    <p class="t--xxs">
+                    <p class="text--xxs">
                         Lorem ipsum dolor sit amet…
                     </p>
                 </div>
                 <script>
-                    test("font-size", getFontSize(-1.5));
+                    test("font-size", getFontSize(-3));
                 </script>
-                
+
                 <div test="size s">
-                    <p class="t--s">
+                    <p class="text--s">
                         Lorem ipsum dolor sit amet…
                     </p>
                 </div>
                 <script>
-                    test("font-size", getFontSize(-0.5));
+                    test("font-size", getFontSize(-1));
                 </script>
-                
+
                 <div test="size m">
-                    <p class="t--m">
+                    <p class="text--m">
                         Lorem ipsum dolor sit amet…
                     </p>
                 </div>
@@ -355,27 +352,27 @@
                 </script>
                 
                 <div test="size xl">
-                    <p class="t--xl">
+                    <p class="text--xl">
                         Lorem ipsum dolor sit amet…
                     </p>
                 </div>
                 <script>
-                    test("font-size", getFontSize(1.0));
+                    test("font-size", getFontSize(2));
                 </script>
             </section>
             
             <section>
                 <h3>Viewport</h3>
 
-                <div test="large">
-                    <div class="viewport_large"></div>
+                <div test="l">
+                    <div class="viewport_l"></div>
                 </div>
                 <script>
                     test("display", "flex");
                 </script>
 
-                <div test="not large">
-                    <div class="v_not-l"></div>
+                <div test="not l">
+                    <div class="viewport_not-l"></div>
                 </div>
                 <script>
                     test("display", "none");
@@ -383,9 +380,9 @@
             </section>
             
             <section>
-                <h3>Util: mx class</h3>
+                <h3>Util: flecss.class</h3>
 
-                <div test=".p_v">
+                <div test=".pv">
                     <div class="test--extend-pv"></div>
                 </div>
                 <script>
@@ -395,7 +392,7 @@
                     test("padding-right", "0px");
                 </script>
 
-                <div test=".p_v--l">
+                <div test=".pvl">
                     <div class="test--extend-pvl"></div>
                 </div>
                 <script>
@@ -407,7 +404,7 @@
             </section>
             
             <section>
-                <h3>Util: mx flecss_color</h3>
+                <h3>Util: flecss.color</h3>
 
                 <div test="color">
                     <div class="test--color"></div>
@@ -418,7 +415,7 @@
             </section>
             
             <section>
-                <h3>Util: fn space</h3>
+                <h3>Util: flecss.space</h3>
 
                 <div test="'xl'">
                     <div class="test--flecss__space-p-xl"></div>
@@ -432,13 +429,7 @@
             <section>
                 <h3>Default: Headings</h3>
                 <script>
-                    const getHeadingSize = level => {
-                        const compStyle = getComputedStyle(document.documentElement);
-                        return `${Math.round(
-                            17 * parseFloat(1.25)**(6 - level)
-                            * 10000
-                        ) / 10000}px`;
-                    };
+                    const getHeadingSize = level => getFontSize(4 - level, 1.5);
                 </script>
                 
                 <div test="H1">

@@ -1,0 +1,49 @@
+@use "sass:color";
+
+@use "flecss.config" as config;
+
+@use "../../_property";
+
+@use "../state/theme";
+
+
+$_property: "color";
+$_shade-percentage: 100% * config.$color-shade-coefficient - 100%;
+
+
+@function _get-color-identifier($identifier, $shade, $theme: null) {
+    @return "#{if($theme, "#{$theme}_", "")}#{$identifier}#{if($shade, "--#{$shade}", "")}";
+}
+
+@mixin _define-color($color, $identifier, $shade, $theme: null) {
+    @include property.define-scoped-property($_property, _get-color-identifier($identifier, $shade, $theme), $color);
+}
+
+
+@function get-color($identifier, $shade: "normal", $theme: null) {
+    @return property.get-scoped-property($_property, _get-color-identifier($identifier, $shade, $theme));
+}
+
+@mixin set-color($identifier, $light-color, $dark-color: null) {
+    $shade-percentage: 100% * config.$color-shade-coefficient - 100%;
+    
+    @include _define-color($light-color, $identifier, "normal", "light");
+    @include _define-color(#{color.scale($light-color, $lightness: $_shade-percentage)}, $identifier, "up", "light");
+    @include _define-color(#{color.scale($light-color, $lightness: -1 * $_shade-percentage)}, $identifier, "down", "light");
+
+    @include _define-color(get-color($identifier, "normal", "light"), $identifier, "normal");
+    @include _define-color(get-color($identifier, "up", "light"), $identifier, "up");
+    @include _define-color(get-color($identifier, "down", "light"), $identifier, "down");
+
+    @if $dark-color {
+        @include _define-color($dark-color, $identifier, "normal", "dark");
+        @include _define-color(color.scale($dark-color, $lightness: -1 * $_shade-percentage), $identifier, "up", "dark");
+        @include _define-color(color.scale($dark-color, $lightness: $_shade-percentage), $identifier, "down", "dark");
+        
+        @include theme.theme--dark {
+            @include _define-color(get-color($identifier, "normal", "dark"), $identifier, "normal");
+            @include _define-color(get-color($identifier, "up", "dark"), $identifier, "up");
+            @include _define-color(get-color($identifier, "down", "dark"), $identifier, "down");
+        }
+    }
+}

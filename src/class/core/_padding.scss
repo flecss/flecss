@@ -1,0 +1,41 @@
+@use "../class" as *;
+
+
+@include class("padding") {
+    @include class-modifier("padding") {
+        padding: get-modifier("padding");
+    }
+
+    @include class-specifier("vertical") {
+        @include class-modifier("padding--v") {
+            padding-top: get-modifier("padding--v");
+            padding-bottom: get-modifier("padding--v");
+        }
+    }
+    @include class-specifier("horizontal") {
+        @include class-modifier("padding--h") {
+            padding-left: get-modifier("padding--h");
+            padding-right: get-modifier("padding--h");
+        }
+    }
+    @include class-specifier("top") {
+        @include class-modifier("padding--t") {
+            padding-top: get-modifier("padding--t");
+        }
+    }
+    @include class-specifier("bottom") {
+        @include class-modifier("padding--b") {
+            padding-bottom: get-modifier("padding--b");
+        }
+    }
+    @include class-specifier("left") {
+        @include class-modifier("padding--l") {
+            padding-left: get-modifier("padding--l");
+        }
+    }
+    @include class-specifier("right") {
+        @include class-modifier("padding--r") {
+            padding-right: get-modifier("padding--r");
+        }
+    }
+}

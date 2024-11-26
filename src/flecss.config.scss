@@ -1,0 +1,21 @@
+$_breakpoint-default-pivot: 1320px;
+
+
+$max-text-width: 37.5rem !default;
+
+$max-wrapper-width: $_breakpoint-default-pivot !default;
+
+$breakpoint--xs: 1/3 * $_breakpoint-default-pivot !default;
+$breakpoint--s: 1/2 * $_breakpoint-default-pivot !default;
+$breakpoint--m: 2/3 * $_breakpoint-default-pivot !default;
+$breakpoint--l: $_breakpoint-default-pivot !default;
+$breakpoint--xl: (1 + 1/3) * $_breakpoint-default-pivot !default;
+
+$base-space: 1.375rem !default;
+
+$space-scale-coefficient: 2 !default;
+
+$fontsize-scale-coefficient: 1.15 !default;
+$headingsize-scale-coefficient: 1.5 !default;
+
+$color-shade-coefficient: 1.15 !default;

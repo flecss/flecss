@@ -1,0 +1,20 @@
+@use "flecss.config" as config;
+
+@use "../../_property";
+
+@use "../class" as *;
+
+
+@include class("wrapper") {
+    @include class-modifier("wrapper-padding", "xl") {
+        margin: 0 auto;
+        padding-top: get-modifier("wrapper-padding");
+        padding-bottom: get-modifier("wrapper-padding");
+        width: 100%;
+        max-width: config.$max-wrapper-width;
+    }
+    
+    @include class-connect("wrapper") {
+        padding-top: 0;
+    }
+}

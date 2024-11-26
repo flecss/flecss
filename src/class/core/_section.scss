@@ -1,0 +1,10 @@
+@use "../class" as *;
+
+
+@include class("section") {
+    @include class-modifier("section-padding", "m") {
+        padding-left: get-modifier("section-padding");
+        padding-right: get-modifier("section-padding");
+        width: 100%;
+    }
+}

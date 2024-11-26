@@ -1,0 +1,49 @@
+@use "sass:math";
+
+@use "flecss.config" as config;
+
+@use "../../_property";
+
+@use "./__orders";
+
+
+@function _compute-fontsize($scale-coefficient, $exponent) {
+    @return 1rem * math.pow($scale-coefficient, $exponent);
+}
+
+
+@function get-fontsize($order: "m") {
+    @if $order == "zero" {
+        @return 0;
+    }
+    
+    @return _compute-fontsize(config.$fontsize-scale-coefficient, map-get(_orders.$orders, $order));
+}
+
+
+@function get-headingsize($exponent) {
+    @return _compute-fontsize(config.$headingsize-scale-coefficient, $exponent);
+}
+
+@mixin assign-headingsize($level) {
+    font-size: get-headingsize(4 - $level);
+}
+
+h1 {
+    @include assign-headingsize(1);
+}
+h2 {
+    @include assign-headingsize(2);
+}
+h3 {
+    @include assign-headingsize(3);
+}
+h4 {
+    @include assign-headingsize(4);
+}
+h5 {
+    @include assign-headingsize(5);
+}
+h6 {
+    @include assign-headingsize(6);
+}

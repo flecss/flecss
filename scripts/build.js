@@ -1,10 +1,11 @@
 const path = require("path");
 const fs = require("fs");
 
+const { DIST_PATH } = require("./DIST_PATH");
+
 const api = require("../lib/api");
 
 
-const DIST_PATH = path.join(__dirname, "../dist");
 fs.mkdirSync(DIST_PATH, {
     recursive: true
 });
@@ -22,5 +23,3 @@ function buildLibrary(libraryName) {
 
 
 buildLibrary("flecss");
-buildLibrary("flecss.min");
-buildLibrary("flecss.min.shorthand");

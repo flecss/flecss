@@ -1,0 +1,11 @@
+@mixin theme--light {
+    @media (prefers-color-scheme: light) {
+        @content;
+    }
+}
+
+@mixin theme--dark {
+    @media (prefers-color-scheme: dark) {
+        @content;
+    }
+}
