@@ -11,7 +11,7 @@ function reportLibraryMeta(libraryName) {
             Math.round(((stats.size * 2**-10) + Number.EPSILON) * 100) / 100
         }kB`
     };
-
+    
     console.log(`\x1b[33m\x1b[4m${
         libraryName
     }\x1b[24m\n${
@@ -23,3 +23,4 @@ function reportLibraryMeta(libraryName) {
 
 
 reportLibraryMeta("flecss");
+reportLibraryMeta("flecss.extra");

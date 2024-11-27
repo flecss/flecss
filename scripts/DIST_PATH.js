@@ -1,1 +1,1 @@
-module.exports.DIST_PATH = require("path").join(__dirname, "../css");
+module.exports.DIST_PATH = require("path").join(__dirname, "../css/");

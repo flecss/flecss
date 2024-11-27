@@ -7,11 +7,11 @@
         pointer-events: none !important;
         opacity: 0.25 !important;
     }
-    
+
     @include class-specifier("hide") {
         visibility: hidden !important;
     }
-
+    
     @include class-specifier("collapse") {
         display: none !important;
     }

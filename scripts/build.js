@@ -23,3 +23,4 @@ function buildLibrary(libraryName) {
 
 
 buildLibrary("flecss");
+buildLibrary("flecss.extra");
