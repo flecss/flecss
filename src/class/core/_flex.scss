@@ -8,7 +8,7 @@
 }
 
 @mixin _col-on-s {
-    @include _fixed-max-breakpoint(680px) {             
+    @include _fixed-max-breakpoint(680px) {
         & > * {
             width: 100%;
         }
@@ -88,14 +88,16 @@
 
     @include class-specifier("across") {
         @include class-modifier("flex-gap", "l") {
-            @include _col-on-s;
-            
             display: flex;
             flex-wrap: wrap;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
             gap: get-modifier("flex-gap");
+
+            @include _fixed-max-breakpoint(680px) {
+                flex-wrap: wrap;
+            }
         }
     }
 

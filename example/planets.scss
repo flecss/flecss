@@ -1,6 +1,9 @@
-// Integrate flecss
 @use "flecss";
 
+
+/**
+ * *** Custom style atomics (flecss) ***
+ */
 
 // Font family
 @include flecss.font("Montserrat", "https://fonts.gstatic.com/s/montserrat/v29/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2");
@@ -14,15 +17,21 @@
 @include flecss.color("bg-gray", #ECECEF, #393942);
 
 
-// Custom properties
+/**
+ * *** Custom properties ***
+ */
+
 :root {
     --border: 1px solid #{flecss.color("bg-gray")};
     --border-radius: 0.375rem;
 }
 
 
-// Custom utilities
-// Enable composition
+/**
+ * *** Custom utilities ***
+ *     Enable composition
+ */
+
 .background {
     &-gray {
         background-color: flecss.color("bg-gray");
@@ -31,24 +40,31 @@
         background-color: flecss.color("secondary", "up");
     }
 }
+
 .text {
-    &-large {
-        @include flecss.class("text--l");   // identity of .text--l
+    &-display {
+        font-size: flecss.headingsize(0);  // one step larger than heading 1 (‘H0’)
     }
     &-subtle {
         color: flecss.color("fg-gray");
     }
 }
-.border-bottom {
-    border-bottom: var(--border);
-}
+
 .rounded {
     border-radius: var(--border-radius);
 }
 
 
-// Custom components
-// Enforce (basic) consistency, prevent composition (recognition over recall)
+/**
+ * *** Custom components (with flecss) ***
+ *     Enforce (basic) consistency,
+ *     prevent composition (recognition over recall)
+ */
+
+.header {
+    border-bottom: var(--border);
+}
+
 .card {
     @include flecss.class("padding");
 
@@ -65,9 +81,11 @@
         height: 15vh;
     }
 }
+
 .button {
-    @include flecss.class("padding_vertical--s");
+    @include flecss.class("padding_vertical--xs");
     @include flecss.class("padding_horizontal--m");
+    @include flecss.class("text--s");
 
     background-color: flecss.color("primary");
     color: flecss.color("fg", null, "dark");
@@ -83,18 +101,22 @@
         background-color: flecss.color("bg");
         color: flecss.color("primary");
         border: 1px solid flecss.color("primary");
-
+        
         &:hover {
             background-color: flecss.color("bg", "down");
         }
     }
 }
+
 .hero {
     background: linear-gradient(45deg, flecss.color("bg"), flecss.color("primary", "up") 750%);
 }
 
 
-// Custom element defaults
+/**
+ * *** Custom element defaults ***
+ */
+
 html {
     background-color: flecss.color("bg");
     color: flecss.color("fg");

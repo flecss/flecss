@@ -8,42 +8,38 @@
 
 
 @function _compute-fontsize($scale-coefficient, $exponent) {
-    @return 1rem * math.pow($scale-coefficient, $exponent);
+   @return 1rem * math.pow($scale-coefficient, $exponent);
 }
 
 
 @function fontsize($order: "m") {
-    @if $order == "zero" {
-        @return 0;
-    }
-    
-    @return _compute-fontsize(config.$fontsize-scale-coefficient, map-get(_orders.$orders, $order));
+   @if $order == "zero" {
+      @return 0;
+   }
+   
+   @return _compute-fontsize(config.$fontsize-scale-coefficient, map-get(_orders.$orders, $order));
 }
 
-
-@function headingsize($exponent) {
-    @return _compute-fontsize(config.$headingsize-scale-coefficient, $exponent);
+@function headingsize($level) {
+   @return _compute-fontsize(config.$headingsize-scale-coefficient, 5 - $level);
 }
 
-@mixin _assign-headingsize($level) {
-    font-size: headingsize(5 - $level);
-}
 
 h1 {
-    @include _assign-headingsize(1);
+   font-size: headingsize(1);
 }
 h2 {
-    @include _assign-headingsize(2);
+   font-size: headingsize(2);
 }
 h3 {
-    @include _assign-headingsize(3);
+   font-size: headingsize(3);
 }
 h4 {
-    @include _assign-headingsize(4);
+   font-size: headingsize(4);
 }
 h5 {
-    @include _assign-headingsize(5);
+   font-size: headingsize(5);
 }
 h6 {
-    @include _assign-headingsize(6);
+   font-size: headingsize(6);
 }

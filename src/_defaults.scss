@@ -107,9 +107,9 @@ h1, h2, h3, h4, h5, h6 {
         transform: translateY(calc(-1 * (0.375em / 2)));
         margin-bottom: -0.375em;
     }
-
+    
     & + div {
-        margin-top: space.space("xs");
+        margin-top: space.space("s");
     }
 }
 p, blockquote,
