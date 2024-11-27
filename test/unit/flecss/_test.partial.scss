@@ -1,7 +1,7 @@
 @use "flecss";
 
-@include flecss.set-color("lime", #00FF00);
+@include flecss.color("lime", #00FF00);
 
 a {
-    color: flecss.get-color("lime");
+    color: flecss.color("lime");
 }

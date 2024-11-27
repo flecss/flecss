@@ -5,7 +5,7 @@
     @include class-modifier("padding") {
         padding: get-modifier("padding");
     }
-
+    
     @include class-specifier("vertical") {
         @include class-modifier("padding--v") {
             padding-top: get-modifier("padding--v");

@@ -1,5 +1,3 @@
-@forward "../class/core/";
-
 @mixin class($classifier) {
     @extend .#{$classifier} !optional;
 }

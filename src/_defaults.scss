@@ -1,6 +1,7 @@
 @use "flecss.config" as config;
 
 @use "./util/layout/space";
+@use "./util/state/breakpoint";
 
 
 * {
@@ -14,9 +15,18 @@ html {
     font-size: 16px;
     font-weight: 400;
     text-rendering: optimizeLegibility;
+    scroll-padding-top: space.space("m");
     scroll-behavior: smooth;
+
+    @include breakpoint.breakpoint--xl(true) {
+        font-size: 17px;
+    }
+    @include breakpoint.breakpoint--s {
+        font-size: 15px;
+    }
 }
-body {
+
+body {  
     margin: 0;
     min-height: 100%;
     font-size: 1rem;
@@ -46,10 +56,12 @@ body {
     }
 }
 
-main,
-header, footer,
-aside, section, div {
-    gap: space.get-space("m");
+main {
+    &,
+    header, footer,
+    aside, section, div {
+        gap: space.space("m");
+    }
 }
 
 main {
@@ -79,6 +91,7 @@ input, textarea {
 }
 
 img {
+    max-width: 100%;
     object-fit: cover;
 }
 
@@ -90,11 +103,20 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.375em;
     font-weight: 600;
 
-    &:not(:first-child) {
-        margin-top: 1em;
-    }
     &:not(:last-child) {
         transform: translateY(calc(-1 * (0.375em / 2)));
-        // margin-bottom: -0.375em;
+        margin-bottom: -0.375em;
+    }
+
+    & + div {
+        margin-top: space.space("xs");
+    }
+}
+p, blockquote,
+ul, ol,
+table,
+div {
+    & + h1, & + h2, & + h3, & + h4, & + h5, & + h6 {
+        margin-top: space.space("s");
     }
 }

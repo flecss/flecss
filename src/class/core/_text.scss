@@ -3,11 +3,10 @@
 @use "../../util/layout/fontsize";
 
 
-
 @mixin _class-modifier($order) {
     &--#{$order} {
-        font-size: fontsize.get-fontsize($order);
-
+        font-size: fontsize.fontsize($order);
+        
         @content;
     }
 
@@ -44,15 +43,10 @@
 
 @include class("text") {
     @include _fontsize-class-modifier;
-    
+
     @include class-specifier("left") {
         @include _fontsize-class-modifier {
             text-align: left;
-        }
-    }
-    @include class-specifier("center") {
-        @include _fontsize-class-modifier {
-            text-align: center;
         }
     }
     @include class-specifier("right") {
@@ -60,8 +54,15 @@
             text-align: right;
         }
     }
+    @include class-specifier("center") {
+        @include _fontsize-class-modifier {
+            width: 100%;
+            text-align: center;
+        }
+    }
     @include class-specifier("justify") {
         @include _fontsize-class-modifier {
+            width: 100%;
             text-align: justify;
         }
     }

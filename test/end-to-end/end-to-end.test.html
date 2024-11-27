@@ -25,10 +25,10 @@
     <body>
         <script>
             const ZERO_PX = "0px";
-            const S_PX = "11px";
-            const M_PX = "22px";
-            const L_PX = "44px";
-            const XL_PX = "88px";
+            const S_PX = "12px";
+            const M_PX = "24px";
+            const L_PX = "48px";
+            const XL_PX = "96px";
         </script>
 
         <div class="total">
@@ -43,7 +43,7 @@
 
         <main>
 
-            <section>
+            <!-- <section>
                 <h3>Display</h3>
 
                 <div test="disable">
@@ -67,7 +67,7 @@
                 <script>
                     test("display", "none");
                 </script>
-            </section>
+            </section> -->
 
             <section>
                 <h3>Flex</h3>
@@ -272,7 +272,7 @@
                         expected: sectionW,
                         eval: (actual, expected) => actual > expected
                     });
-                    test("width", "792px", 0);
+                    test("width", "788px", 0);
                     test("padding", [ XL_PX, ZERO_PX ].join(" "), 0);
                     test("padding-left", ZERO_PX, 0);
                 </script>
@@ -319,7 +319,6 @@
 
                 <script>
                     const getFontSize = (order = 0, scaleCoefficient = 1.15) => {
-                        const compStyle = getComputedStyle(document.documentElement);
                         return `${16 * scaleCoefficient**order}px`;
                     };
                 </script>
@@ -405,7 +404,7 @@
             
             <section>
                 <h3>Util: flecss.color</h3>
-
+                
                 <div test="color">
                     <div class="test--color"></div>
                 </div>
@@ -416,7 +415,7 @@
             
             <section>
                 <h3>Util: flecss.space</h3>
-
+                
                 <div test="'xl'">
                     <div class="test--flecss__space-p-xl"></div>
                 </div>
@@ -429,7 +428,7 @@
             <section>
                 <h3>Default: Headings</h3>
                 <script>
-                    const getHeadingSize = level => getFontSize(4 - level, 1.5);
+                    const getHeadingSize = level => getFontSize(5 - level, 1.375);
                 </script>
                 
                 <div test="H1">

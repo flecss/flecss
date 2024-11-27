@@ -1,6 +1,21 @@
-@use "../../util/state/breakpoint";
-
 @use "../class" as *;
+
+
+@mixin _fixed-max-breakpoint($px) {
+    @media (max-width: #{$px}) {
+        @content;
+    }
+}
+
+@mixin _col-on-s {
+    @include _fixed-max-breakpoint(680px) {             
+        & > * {
+            width: 100%;
+        }
+        
+        flex-wrap: wrap;
+    }
+}
 
 
 @function flex__child-width($m) {
@@ -24,17 +39,17 @@
                 width: flex__child-width($n) !important;
                 
                 @if $n > 4 {
-                    @include breakpoint.breakpoint--m {
+                    @include _fixed-max-breakpoint(1280px) {
                         width: flex__child-width(4) !important;
                     }
                 }
                 @if $n > 2 {
-                    @include breakpoint.breakpoint--s {
+                    @include _fixed-max-breakpoint(1080px) {
                         width: flex__child-width(2) !important;
                     }
                 }
                 @if $n > 1 {
-                    @include breakpoint.breakpoint--xs {
+                    @include _fixed-max-breakpoint(680px) {
                         width: flex__child-width(1) !important;
                     }
                 }
@@ -42,6 +57,7 @@
         }
     }
 }
+
 
 @include class("flex") {
     display:  flex;
@@ -70,22 +86,29 @@
         }
     }
 
+    @include class-specifier("across") {
+        @include class-modifier("flex-gap", "l") {
+            @include _col-on-s;
+            
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: get-modifier("flex-gap");
+        }
+    }
+
     @include class-specifier("left") {
         @include class-modifier("flex-gap", "xl") {
-            @include breakpoint.breakpoint--s {                
-                & > * {
-                    width: 100%;
-                }
-                
-                flex-wrap: wrap;
-            }
+            @include _col-on-s;
 
             display: flex;
             flex-direction: row;
             align-items: flex-start;
             gap: get-modifier("flex-gap");
             width: 100%;
-            height: fit-content ;
+            height: fit-content;
 
             & > *:first-child {
                 flex: 1 0 0;
@@ -95,14 +118,8 @@
     }
     @include class-specifier("right") {
         @include class-modifier("flex-gap", "xl") {
-            @include breakpoint.breakpoint--s {
-                & > * {
-                    width: 100%;
-                }
-                
-                flex-wrap: wrap;
-            }
-
+            @include _col-on-s;
+            
             display: flex;
             flex-direction: row;
             align-items: flex-start;

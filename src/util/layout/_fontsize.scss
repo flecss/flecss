@@ -12,7 +12,7 @@
 }
 
 
-@function get-fontsize($order: "m") {
+@function fontsize($order: "m") {
     @if $order == "zero" {
         @return 0;
     }
@@ -21,29 +21,29 @@
 }
 
 
-@function get-headingsize($exponent) {
+@function headingsize($exponent) {
     @return _compute-fontsize(config.$headingsize-scale-coefficient, $exponent);
 }
 
-@mixin assign-headingsize($level) {
-    font-size: get-headingsize(4 - $level);
+@mixin _assign-headingsize($level) {
+    font-size: headingsize(5 - $level);
 }
 
 h1 {
-    @include assign-headingsize(1);
+    @include _assign-headingsize(1);
 }
 h2 {
-    @include assign-headingsize(2);
+    @include _assign-headingsize(2);
 }
 h3 {
-    @include assign-headingsize(3);
+    @include _assign-headingsize(3);
 }
 h4 {
-    @include assign-headingsize(4);
+    @include _assign-headingsize(4);
 }
 h5 {
-    @include assign-headingsize(5);
+    @include _assign-headingsize(5);
 }
 h6 {
-    @include assign-headingsize(6);
+    @include _assign-headingsize(6);
 }

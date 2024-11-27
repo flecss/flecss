@@ -23,7 +23,7 @@
             @include _viewport_collapse;
         }
     }
-
+    
     @include class-specifier("not-s") {
         @include breakpoint.breakpoint--s(true) {
             @include _viewport_collapse;

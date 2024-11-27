@@ -1,8 +1,8 @@
-@mixin set-font($name, $url, $weight: 400) {
+@mixin font($name, $url, $weight: null) {
     @font-face {
         font-family: "#{$name}";
-        font-weight: #{$weight};
         font-display: swap;
-        src: local("#{$name}"), url("#{$url}");
+        font-weight: #{if($weight, $weight, 100 900)};
+        src: url("#{$url}");
     }
 }

@@ -19,7 +19,7 @@
 
 @mixin _class-modifier($var, $order) {
     &--#{$order} {
-        @include property.define-scoped-property("space", $var, space.get-space($order), false);
+        @include property.define-scoped-property("space", $var, space.space($order), false);
 
         @content;
     }
@@ -29,7 +29,7 @@
 
 
 @mixin class-modifier($var, $default-order: "m") {
-    @include property.define-scoped-property("space", $var, space.get-space($default-order), false);
+    @include property.define-scoped-property("space", $var, space.space($default-order), false);
     
     @include _class-modifier($var, "zero") {
         @content;

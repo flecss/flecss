@@ -42,7 +42,7 @@
     "test": "npm run test:unit && npm run test:end-to-end",
     "prerelease": "npm run test && npm run build",
     "release": "npx rjs-releasing . --github",
-    "example:transpile": " ./flecss.sh ./example/extra.scss ./example/extra.css"
+    "example:transpile": " ./flecss.sh ./example/ ./example/"
   },
   "dependencies": {
     "clean-css": "^5.3.3",

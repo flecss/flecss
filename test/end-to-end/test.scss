@@ -8,12 +8,12 @@
     @include flecss.class("padding_vertical--l");
 }
 
-@include flecss.set-color("test", #FF0000);
+@include flecss.color("test", #FF0000);
 
 .test--color {
-    color: flecss.get-color("test");
+    color: flecss.color("test");
 }
 
 .test--flecss__space-p-xl {
-    padding-top: flecss.get-space("xl");
+    padding-top: flecss.space("xl");
 }

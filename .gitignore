@@ -6,4 +6,4 @@ css/
 test/end-to-end/test.css
 test/cli/test.css
 
-example/extra.css
+example/*.css
