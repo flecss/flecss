@@ -1,6 +1,6 @@
 @use "sass:math";
 
-@use "flecss.config" as config;
+@use "config.flecss" as config;
 
 @use "../../_property";
 
@@ -9,16 +9,17 @@
 @use "./__orders";
 
 
-@include property.define-scoped-property("space", "responsiveness-scale-coefficient", 1.0);
+@include property.define-scoped-property("space", "responsive-discount-coefficient", 1.0);
 @include breakpoint.breakpoint--m {
-    @include property.define-scoped-property("space", "responsiveness-scale-coefficient", 0.9);
+    @include property.define-scoped-property("space", "responsive-discount-coefficient", 0.9);
 }
 @include breakpoint.breakpoint--s {
-    @include property.define-scoped-property("space", "responsiveness-scale-coefficient", 0.825);
+    @include property.define-scoped-property("space", "responsive-discount-coefficient", 0.825);
 }
 @include breakpoint.breakpoint--xs {
-    @include property.define-scoped-property("space", "responsiveness-scale-coefficient", 0.8);
+    @include property.define-scoped-property("space", "responsive-discount-coefficient", 0.8);
 }
+
 
 @function _compute-space($exponent, $negative) {
     $factor: 1;
@@ -28,7 +29,7 @@
 
     @return calc(
           #{$factor * config.$base-space * math.pow(config.$space-scale-coefficient, $exponent)}
-        * #{property.get-scoped-property("space", "responsiveness-scale-coefficient")}
+        * #{property.get-scoped-property("space", "responsive-discount-coefficient")}
     );
 }
 
@@ -39,9 +40,9 @@
     }
 
     $exponent: map-get(_orders.$orders, $order);
-    /* @if $exponent < 0 {
-        $exponent: $exponent * 0.8;
-    } */
+    @if $exponent < 0 {
+        $exponent: $exponent * 0.9;
+    }   // small space growth smoothing
 
     @return _compute-space($exponent, $negative);
 }

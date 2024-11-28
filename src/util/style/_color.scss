@@ -1,6 +1,6 @@
 @use "sass:color" as sass-color;
 
-@use "flecss.config" as config;
+@use "config.flecss" as config;
 
 @use "../../_property";
 
@@ -15,33 +15,42 @@ $_shade-percentage: 100% * config.$color-shade-coefficient - 100%;
     @return "#{if($theme, "#{$theme}_", "")}#{$identifier}--#{if($shade, $shade, "normal")}";
 }
 
+
 @mixin _define-color($color, $identifier, $shade, $theme: null) {
     @include property.define-scoped-property($_property, _color-identifier($identifier, $shade, $theme), $color);
 }
 
+@mixin _define-color-group($color, $identifier, $theme: null, $invert-shading: false) {
+    $shade-coefficient: config.$color-shade-coefficient - 1;
+    $shade-percentage: max(25%, 100% - sass-color.whiteness($color));
+    $factor: if($invert-shading, -1, 1);
+
+    @include _define-color($color, $identifier, "normal", $theme);
+    @include _define-color(#{sass-color.scale($color, $lightness: $factor * $shade-percentage * 1 * $shade-coefficient)}, $identifier, "light", $theme);
+    @include _define-color(#{sass-color.scale($color, $lightness: $factor * $shade-percentage * 2 * $shade-coefficient)}, $identifier, "lighter", $theme);
+    @include _define-color(#{sass-color.scale($color, $lightness: -1 * $factor * $shade-percentage * 1 * $shade-coefficient)}, $identifier, "dark", $theme);
+    @include _define-color(#{sass-color.scale($color, $lightness: -1 * $factor * $shade-percentage * 2 * $shade-coefficient)}, $identifier, "darker", $theme);
+}
+
+@mixin _enable-color-group-theme($identifier, $theme) {
+    @include _define-color(color($identifier, "normal", $theme), $identifier, "normal");
+    @include _define-color(color($identifier, "light", $theme), $identifier, "light");
+    @include _define-color(color($identifier, "lighter", $theme), $identifier, "lighter");
+    @include _define-color(color($identifier, "dark", $theme), $identifier, "dark");
+    @include _define-color(color($identifier, "darker", $theme), $identifier, "darker");
+}
+
 
 @mixin color($identifier, $light-color, $dark-color: null) {
-    $_shade-percentage: min(100%, 125% - sass-color.whiteness($light-color)) * (config.$color-shade-coefficient - 1);
+    @include _define-color-group($light-color, $identifier, "light");
 
-    @include _define-color($light-color, $identifier, "normal", "light");
-    @include _define-color(#{sass-color.scale($light-color, $lightness: $_shade-percentage)}, $identifier, "up", "light");
-    @include _define-color(#{sass-color.scale($light-color, $lightness: -1 * $_shade-percentage)}, $identifier, "down", "light");
-    
-    @include _define-color(color($identifier, "normal", "light"), $identifier, "normal");
-    @include _define-color(color($identifier, "up", "light"), $identifier, "up");
-    @include _define-color(color($identifier, "down", "light"), $identifier, "down");
-    
+    @include _enable-color-group-theme($identifier, "light");
+
     @if $dark-color {
-        $_shade-percentage: min(100%, 25% + sass-color.whiteness($dark-color)) * (config.$color-shade-coefficient - 1);
-        
-        @include _define-color($dark-color, $identifier, "normal", "dark");
-        @include _define-color(sass-color.scale($dark-color, $lightness: -1 * $_shade-percentage), $identifier, "up", "dark");
-        @include _define-color(sass-color.scale($dark-color, $lightness: $_shade-percentage), $identifier, "down", "dark");
+        @include _define-color-group($dark-color, $identifier, "dark", true);
 
         @include theme.theme--dark {
-            @include _define-color(color($identifier, "normal", "dark"), $identifier, "normal");
-            @include _define-color(color($identifier, "up", "dark"), $identifier, "up");
-            @include _define-color(color($identifier, "down", "dark"), $identifier, "down");
+            @include _enable-color-group-theme($identifier, "dark");
         }
     }
 }

@@ -1,4 +1,4 @@
-@use "flecss.config" as config;
+@use "config.flecss" as config;
 
 
 @mixin _breakpoint($px, $min: false) {
@@ -7,7 +7,7 @@
         $boundary: "min";
         $px: $px + 1;
     }
-
+    
     @media (#{$boundary}-width: #{$px}) {
         @content;
     }

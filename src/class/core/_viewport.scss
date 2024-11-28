@@ -1,3 +1,5 @@
+@use "config.flecss" as config;
+
 @use "../../util/state/breakpoint";
 
 @use "../class" as *;
@@ -8,35 +10,67 @@
 }
 
 @include class("viewport") {
-    @include class-specifier("s") {
+    @include class-specifier("min-s") {
         @include breakpoint.breakpoint--s {
             @include _viewport_collapse;
         }
     }
-    @include class-specifier("m") {
+    @include class-specifier("min-m") {
         @include breakpoint.breakpoint--m {
             @include _viewport_collapse;
         }
     }
-    @include class-specifier("l") {
+    @include class-specifier("min-l") {
         @include breakpoint.breakpoint--l {
             @include _viewport_collapse;
         }
     }
     
-    @include class-specifier("not-s") {
+    @include class-specifier("max-s") {
         @include breakpoint.breakpoint--s(true) {
             @include _viewport_collapse;
-        } 
+        }
     }
-    @include class-specifier("not-m") {
+    @include class-specifier("max-m") {
         @include breakpoint.breakpoint--m(true) {
             @include _viewport_collapse;
         }
     }
-    @include class-specifier("not-l") {
+    @include class-specifier("max-l") {
         @include breakpoint.breakpoint--l(true) {
             @include _viewport_collapse;
-        } 
+        }
+    }
+
+    @include class-specifier("s") {
+        @include breakpoint.breakpoint--s(true) {
+            @include _viewport_collapse;
+        }
+    }
+    @include class-specifier("m") {
+        @media (max-width: #{config.$breakpoint--s}) or (min-width: #{config.$breakpoint--m + 1px}) {
+            @include _viewport_collapse;
+        }
+    }
+    @include class-specifier("l") {
+        @include breakpoint.breakpoint--m {
+            @include _viewport_collapse;
+        }
+    }
+
+    @include class-specifier("not-s") {
+        @include breakpoint.breakpoint--s {
+            @include _viewport_collapse;
+        }
+    }
+    @include class-specifier("not-m") {
+        @media (min-width: #{config.$breakpoint--s + 1px}) or (max-width: #{config.$breakpoint--m}) {
+            @include _viewport_collapse;
+        }
+    }
+    @include class-specifier("not-l") {
+        @include breakpoint.breakpoint--m(true) {
+            @include _viewport_collapse;
+        }
     }
 }

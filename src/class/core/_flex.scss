@@ -25,7 +25,7 @@
 
 @mixin flex__partition($n) {
     @include class-specifier($n) {
-        @include class-modifier("flex-gap", "l") {
+        @include class-modifier("flex-gap") {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
@@ -35,6 +35,7 @@
             height: fit-content;
             
             --flex-parent-gap: #{get-modifier("flex-gap")};
+            
             & > * {
                 width: flex__child-width($n) !important;
                 
@@ -61,7 +62,7 @@
 
 @include class("flex") {
     display:  flex;
-
+    
     @include flex__partition(1);
     @include flex__partition(2);
     @include flex__partition(3);
@@ -87,14 +88,14 @@
     }
 
     @include class-specifier("across") {
-        @include class-modifier("flex-gap", "l") {
+        @include class-modifier("flex-gap") {
             display: flex;
             flex-wrap: wrap;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
             gap: get-modifier("flex-gap");
-
+            
             @include _fixed-max-breakpoint(680px) {
                 flex-wrap: wrap;
             }
@@ -102,7 +103,7 @@
     }
 
     @include class-specifier("left") {
-        @include class-modifier("flex-gap", "xl") {
+        @include class-modifier("flex-gap") {
             @include _col-on-s;
 
             display: flex;
@@ -119,7 +120,7 @@
         }
     }
     @include class-specifier("right") {
-        @include class-modifier("flex-gap", "xl") {
+        @include class-modifier("flex-gap") {
             @include _col-on-s;
             
             display: flex;

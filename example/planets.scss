@@ -14,7 +14,7 @@
 @include flecss.color("bg", #FFFFFF, #2A2A2A);
 @include flecss.color("fg", #181818, #FFFFFF);
 @include flecss.color("fg-gray", #6F6F6F, #A9A9A9);
-@include flecss.color("bg-gray", #ECECEF, #393942);
+@include flecss.color("bg-gray", #F4F4F9, #393942);
 
 
 /**
@@ -28,6 +28,29 @@
 
 
 /**
+ * *** Custom element defaults ***
+ */
+
+ html {
+    background-color: flecss.color("bg");
+    color: flecss.color("fg");
+    font-family: "Montserrat";
+}
+
+a {
+    color: flecss.color("primary");
+    
+    &[target="_blank"]::after {
+        content: "↗";
+        display: inline-block;
+        margin-left: flecss.space("xxs");
+        font-size: 0.575em;
+        transform: translateY(-0.475em);
+    }
+}
+
+
+/**
  * *** Custom utilities ***
  *     Enable composition
  */
@@ -37,13 +60,14 @@
         background-color: flecss.color("bg-gray");
     }
     &-highlight {
-        background-color: flecss.color("secondary", "up");
+        background-color: flecss.color("secondary", "light");
     }
 }
 
 .text {
     &-display {
         font-size: flecss.headingsize(0);  // one step larger than heading 1 (‘H0’)
+        font-weight: 800;
     }
     &-subtle {
         color: flecss.color("fg-gray");
@@ -66,19 +90,22 @@
 }
 
 .card {
-    @include flecss.class("padding");
+    @include flecss.class("flex_vertical--zero");
 
     border: var(--border);
     border-radius: var(--border-radius);
+    overflow: hidden;
 
-    &--highlight {
-        border-color: flecss.color("secondary");
-        border-width: 2px;
+    &--gray {
+        background-color: flecss.color("bg-gray");
     }
 
     &-image {
-        width: 100%;
+            width: 100%;
         height: 15vh;
+    }
+    &-text {
+        @include flecss.class("padding");
     }
 }
 
@@ -94,43 +121,20 @@
     border-radius: var(--border-radius);
 
     &:hover {
-        background-color: flecss.color("primary", "down");
+        background-color: flecss.color("primary", "dark");
     }
 
     &--subtle {
         background-color: flecss.color("bg");
         color: flecss.color("primary");
         border: 1px solid flecss.color("primary");
-        
+
         &:hover {
-            background-color: flecss.color("bg", "down");
+            background-color: flecss.color("bg", "dark");
         }
     }
 }
 
 .hero {
-    background: linear-gradient(45deg, flecss.color("bg"), flecss.color("primary", "up") 750%);
-}
-
-
-/**
- * *** Custom element defaults ***
- */
-
-html {
-    background-color: flecss.color("bg");
-    color: flecss.color("fg");
-    font-family: "Montserrat";
-}
-
-a {
-    color: flecss.color("primary");
-
-    &[target="_blank"]::after {
-        content: "↗";
-        display: inline-block;
-        margin-left: flecss.space("xxs");
-        font-size: 0.575em;
-        transform: translateY(-0.475em);
-    }
+    background: linear-gradient(45deg, flecss.color("bg"), flecss.color("primary", "light") 750%);
 }

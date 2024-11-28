@@ -25,7 +25,7 @@
     <body>
         <script>
             const ZERO_PX = "0px";
-            const S_PX = "12px";
+            const S_PX = "12.9px";
             const M_PX = "24px";
             const L_PX = "48px";
             const XL_PX = "96px";
@@ -36,14 +36,15 @@
                 <span class="total-success"></span> / <span class="total-failure"></span> successful
             </div>
         </div>
-        
+
         <p class="info">
             virtual viewport width: 1440px
         </p>
-
+        
         <main>
 
             <!-- <section>
+                
                 <h3>Display</h3>
 
                 <div test="disable">
@@ -90,7 +91,7 @@
                         eval: (actual, expected) => actual > expected
                     }, 0);
                 </script>
-
+                
                 <div test="2">
                     <div class="flex_2--l">
                         <div></div>
@@ -124,7 +125,7 @@
                 </div>
                 <script>
                     flexW = document.querySelector("section").clientWidth * 0.25;
-                    test("gap", L_PX);
+                    test("gap", M_PX);
                     test("width", {
                         fn: (actual) => parseInt(actual),
                         expected: flexW,
@@ -318,7 +319,7 @@
                 </script>
 
                 <script>
-                    const getFontSize = (order = 0, scaleCoefficient = 1.15) => {
+                    const getFontSize = (order = 0, scaleCoefficient = 1.125) => {
                         return `${16 * scaleCoefficient**order}px`;
                     };
                 </script>
@@ -362,7 +363,7 @@
             
             <section>
                 <h3>Viewport</h3>
-
+                
                 <div test="l">
                     <div class="viewport_l"></div>
                 </div>

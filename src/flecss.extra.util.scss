@@ -1,6 +1,7 @@
 @forward "./util/";
 
 @forward "./class/core/";
+@forward "./class/extra/";
 
 @mixin class($classifier) {
     @extend .#{$classifier} !optional;

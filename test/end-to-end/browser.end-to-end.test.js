@@ -25,7 +25,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-function test(styleProperty, rawExpectedValue, subChildIndex) {
+function test(styleProperty, expectedValue, subChildIndex) {
     const testElement = Array.from(document.querySelectorAll("*[test]")).pop();
     let testPivotElement = testElement.children[0];
     testPivotElement = !isNaN(subChildIndex) ? testPivotElement.children[subChildIndex] : testPivotElement;
@@ -34,21 +34,18 @@ function test(styleProperty, rawExpectedValue, subChildIndex) {
 
     const roundPxValue = value => {
         return (/^\d+(\.\d+)?px$/.test(value))
-            ? `${Math.round(parseFloat(value) * 1000) / 1000}px`
+            ? `${Math.round(parseFloat(value) * 10) / 10}px`
             : value;
     };
-    const expectedValue = roundPxValue(rawExpectedValue);
-    const actualValue = roundPxValue(window.getComputedStyle(testPivotElement)[styleProperty]);
 
-    const resolvedActualValue = expectedValue.fn
-    ? expectedValue.fn(actualValue)
-    : actualValue;
-    const resolvedExpectedValue = expectedValue.expected
-    ? expectedValue.expected
-    : expectedValue;
+    const actualValue = window.getComputedStyle(testPivotElement)[styleProperty];
+    const resolvedActualValue = roundPxValue(expectedValue.fn
+        ? expectedValue.fn(actualValue)
+        : actualValue);
+    const resolvedExpectedValue = roundPxValue(expectedValue.expected ?? expectedValue);
     const wasSuccessful = (expectedValue.eval ?? ((a, b) => a == b))
     .call(null, resolvedActualValue, resolvedExpectedValue);
-
+    
     resultElement.querySelector(".result-property").textContent = styleProperty;
     resultElement.querySelector(".result-expected").textContent = resolvedExpectedValue;
     resultElement.querySelector(".result-actual").textContent = !wasSuccessful ? (resolvedActualValue ?? "-") : "";
@@ -64,7 +61,7 @@ function test(styleProperty, rawExpectedValue, subChildIndex) {
     document.querySelector(".total-success").textContent = `${total.success}`;
     document.querySelector(".total-failure").textContent = `${total.success + total.failure}`;
     !wasSuccessful && document.querySelector(".total").classList.add("failure");
-    
+
     if(processedTestElements.has(testElement)) return;
 
     const titleElement = document.querySelector("#title").content.cloneNode(true);
