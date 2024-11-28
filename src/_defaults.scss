@@ -57,8 +57,7 @@ body {
 }
 
 main {
-    header, footer,
-    aside, section, div {
+    aside, div {
         gap: space.space("m");
     }
 }
