@@ -20,11 +20,11 @@ $_shade-percentage: 100% * config.$color-shade-coefficient - 100%;
     @include property.define-scoped-property($_property, _color-identifier($identifier, $shade, $theme), $color);
 }
 
-@mixin _define-color-group($color, $identifier, $theme: null, $invert-shading: false) {
+@mixin _define-color-group($color, $lightness, $identifier, $theme: null, $invert-shading: false) {
     $shade-coefficient: config.$color-shade-coefficient - 1;
-    $shade-percentage: max(25%, 100% - sass-color.whiteness($color));
+    $shade-percentage: max(25%, $lightness);
     $factor: if($invert-shading, -1, 1);
-
+    
     @include _define-color($color, $identifier, "normal", $theme);
     @include _define-color(#{sass-color.scale($color, $lightness: $factor * $shade-percentage * 1 * $shade-coefficient)}, $identifier, "light", $theme);
     @include _define-color(#{sass-color.scale($color, $lightness: $factor * $shade-percentage * 2 * $shade-coefficient)}, $identifier, "lighter", $theme);
@@ -42,12 +42,12 @@ $_shade-percentage: 100% * config.$color-shade-coefficient - 100%;
 
 
 @mixin color($identifier, $light-color, $dark-color: null) {
-    @include _define-color-group($light-color, $identifier, "light");
+    @include _define-color-group($light-color, 100% - sass-color.whiteness($light-color), $identifier, "light");
 
     @include _enable-color-group-theme($identifier, "light");
 
     @if $dark-color {
-        @include _define-color-group($dark-color, $identifier, "dark", true);
+        @include _define-color-group($dark-color, sass-color.whiteness($dark-color), $identifier, "dark", true);
 
         @include theme.theme--dark {
             @include _enable-color-group-theme($identifier, "dark");

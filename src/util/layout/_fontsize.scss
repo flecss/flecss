@@ -28,14 +28,17 @@
     @include property.define-scoped-property("headingsize", "responsive-discount-coefficient", 0.9);
 }
 @include breakpoint.breakpoint--s {
-    @include property.define-scoped-property("headingsize", "responsive-discount-coefficient", 0.775);
+	@include property.define-scoped-property("headingsize", "responsive-discount-coefficient", 0.775);
 }
 @include breakpoint.breakpoint--xs {
     @include property.define-scoped-property("headingsize", "responsive-discount-coefficient", 0.625);
 }
 
 @function headingsize($level) {
-	@return calc(_compute-fontsize(config.$headingsize-scale-coefficient, 5 - $level) * property.get-scoped-property("headingsize", "responsive-discount-coefficient"));
+	@return calc(
+		_compute-fontsize(config.$headingsize-scale-coefficient, 5 - $level)
+		* property.get-scoped-property("headingsize", "responsive-discount-coefficient")
+	);
 }
 
 

@@ -11,9 +11,9 @@ $breakpoint--m: 2/3 * $_breakpoint-default-pivot !default;
 $breakpoint--l: $_breakpoint-default-pivot !default;
 $breakpoint--xl: (1 + 1/3) * $_breakpoint-default-pivot !default;
 
-$base-space: 1.5rem !default;
+$space-base-unit: 1.5rem !default;
 
-$space-scale-coefficient: 2 !default;
+$space-scale-coefficient: 2.0 !default;
 
 $fontsize-scale-coefficient: 1.125 !default;
 $headingsize-scale-coefficient: 1.375 !default;

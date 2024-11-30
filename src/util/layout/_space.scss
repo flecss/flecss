@@ -26,9 +26,9 @@
     @if $negative {
         $factor: -1;
     }
-
+    
     @return calc(
-          #{$factor * config.$base-space * math.pow(config.$space-scale-coefficient, $exponent)}
+          #{$factor * config.$space-base-unit * math.pow(config.$space-scale-coefficient, $exponent)}
         * #{property.get-scoped-property("space", "responsive-discount-coefficient")}
     );
 }

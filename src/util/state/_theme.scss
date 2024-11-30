@@ -1,11 +1,17 @@
+@mixin theme($theme) {
+    @media (prefers-color-scheme: #{$theme}) {
+        @content;
+    }
+}
+
 @mixin theme--light {
-    @media (prefers-color-scheme: light) {
+    @include theme(light) {
         @content;
     }
 }
 
 @mixin theme--dark {
-    @media (prefers-color-scheme: dark) {
+    @include theme(dark) {
         @content;
     }
 }

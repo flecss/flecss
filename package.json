@@ -36,7 +36,7 @@
     "test:unit": "node ./test/unit/unit.test.js",
     "test:end-to-end": "node ./test/end-to-end/app.end-to-end.test.js",
     "test:end-to-end:view": "npm run test:end-to-end ; open ./test/end-to-end/end-to-end.test.html",
-    "test:cli": "./flecss.sh ./test/cli/_test.scss ./test/cli/test.css --variables ./test/cli/overrides.json --trace-warnings --print-stacktrace",
+    "test:cli": "./flecss.sh ./test/cli/_test.scss ./test/cli/test.css --config ./test/cli/overrides.json --trace-warnings --print-stacktrace",
     "test:cli:standalone": "npm run test:cli -- -L standalone",
     "test:cli:watch": "npm run test:cli -- --watch",
     "test": "npm run test:unit && npm run test:end-to-end",

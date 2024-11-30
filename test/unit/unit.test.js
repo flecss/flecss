@@ -7,7 +7,7 @@ const flecss = require("../../lib/api");
 const transpiled = flecss
     .createTranspiler({
         development: true,
-        variables: require(join(__dirname, "./flecss/overrides.json"))
+        config: require(join(__dirname, "./flecss/overrides.json"))
     })
     .fromFile(join(__dirname, "./flecss/_test.scss"));
 

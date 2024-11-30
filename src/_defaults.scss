@@ -106,10 +106,6 @@ h1, h2, h3, h4, h5, h6 {
     }
     &:not(:last-child) {
         transform: translateY(calc(-1 * (0.375em / 2)));
-        margin-bottom: calc(-0.375em + space.space("xs"));
-
-        & + p {
-            margin-top: -0.375em;
-        }
+        margin-bottom: calc(-0.375em + space.space("xxs"));
     }
 }

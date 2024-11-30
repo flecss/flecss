@@ -32,7 +32,7 @@
             align-items: flex-start;
             gap: get-modifier("flex-gap");
             width: 100%;
-            height: fit-content;
+            height: fit-content;    
             
             --flex-parent-gap: #{get-modifier("flex-gap")};
             
@@ -62,7 +62,7 @@
 
 @include class("flex") {
     display:  flex;
-    
+
     @include flex__partition(1);
     @include flex__partition(2);
     @include flex__partition(3);
@@ -95,6 +95,7 @@
             align-items: center;
             justify-content: space-between;
             gap: get-modifier("flex-gap");
+            width: 100%;
             
             @include _fixed-max-breakpoint(680px) {
                 flex-wrap: wrap;

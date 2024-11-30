@@ -5,7 +5,5 @@ Flags:
 --watch, -W             Watch file changes for incremental builds.
 
 Options:
---library, -L           Specify the flecss library to compile with (see above, default is 'flecss').
---variables, -V         Specify path to a file that contains overrides for flecss variables  (.scss, or .json).
-
-https://t-ski.github.io/flecss
+--library, -L           Specify the flecss library to compile with (default is 'flecss').
+--config, -C            Specify path to a file that contains overrides for flecss variables  (.scss, or .json).
